@@ -92,7 +92,6 @@ payment/
 ├── tests/                # Test package
 │   ├── __init__.py
 │   └── test_payment.py   # Tests for payment service
-├── .env                  # Environment variables (not in repo)
 ├── .gitignore            # Git ignore file
 ├── requirements.txt      # Project dependencies
 └── README.md             # This file
