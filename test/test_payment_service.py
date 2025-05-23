@@ -92,7 +92,61 @@ def test_delete_payment_service():
     # Confirm the service has been deleted
     response = client.get("/payments/services/TEST003")
     assert response.status_code == 404
+
+def test_list_all_payments():
+    """Test retrieving all payment records"""
+    # First create some services and payment records
+    # Create service
+    service_data = {
+        "service_id": "test_list_all",
+        "name": "Test List All Service",
+        "description": "Service for testing list all payments",
+        "base_price": 250.0
+    }
+    client.post("/payments/services", json=service_data)
     
+    # Create several payment records
+    for i in range(3):
+        payment_data = {
+            "service_id": "test_list_all",
+            "amount": 250.0,
+            "user_id": f"user_list_{i}",
+            "email": f"test_list_{i}@example.com"
+        }
+        client.post("/payments/create", json=payment_data)
+    
+    # Test retrieving all payment records
+    response = client.get("/payments")
+    assert response.status_code == 200
+    assert "payments" in response.json()
+    
+    # Ensure the return is a list
+    payments_list = response.json()["payments"]
+    assert isinstance(payments_list, list)
+    
+    # Ensure there are at least the 3 payment records we just created
+    # Note: Since other tests might also create payment records, the total count might be greater than 3
+    assert len(payments_list) >= 3
+    
+    # Check if the returned data structure is correct
+    for payment in payments_list:
+        assert "payment_id" in payment
+        assert "service_id" in payment
+        assert "service_name" in payment
+        assert "amount" in payment
+        assert "user_id" in payment
+        assert "status" in payment
+        assert "created_at" in payment
+        assert "email" in payment
+    
+    # Check if we can find the payment records we just created
+    found_test_payments = [p for p in payments_list if p["service_id"] == "test_list_all"]
+    assert len(found_test_payments) >= 3
+    
+    # Check if the service name is correct
+    for payment in found_test_payments:
+        assert payment["service_name"] == "Test List All Service"
+
 def test_create_payment():
     """Test creating a new payment order"""
     # First create a service
