@@ -259,6 +259,31 @@ async def delete_payment_service(service_id: str) -> MessageResponse:
 
 
 # payment order related nodes
+@app.get("/payments")
+async def list_all_payments():
+    """Get all payment records"""
+    logger.info("Listing all payments")
+    
+
+    all_payments = []
+    for payment_id, payment in payments.items():
+        service_name = "Unknown Service"
+        if payment.service_id in payment_services:
+            service_name = payment_services[payment.service_id].name
+            
+        all_payments.append({
+            "payment_id": payment.payment_id,
+            "service_id": payment.service_id,
+            "service_name": service_name,
+            "amount": payment.amount,
+            "user_id": payment.user_id,
+            "status": payment.status,
+            "created_at": payment.created_at.isoformat(),
+            "email": payment.email
+        })
+    
+    return {"payments": all_payments}
+
 @app.post("/payments/create")
 async def create_payment(payment: PaymentCreate) -> PaymentStatus:
     payment_id = str(uuid.uuid4()) # identify the payment
