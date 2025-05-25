@@ -13,10 +13,10 @@ class MailerClient:
         Args:
             service_name: Name of the service using this client (for logging)
             base_url: Base URL of the email service. If not provided, uses EMAIL_SERVICE_URL env var
-                     or defaults to http://localhost:8001
+                     or defaults to http://localhost:6000
         """
         self.service_name = service_name
-        self.base_url = base_url or os.environ.get("EMAIL_SERVICE_URL", "http://localhost:8001")
+        self.base_url = base_url or os.environ.get("EMAIL_SERVICE_URL", "http://localhost:6000")
     def send_email(self, 
                   to_email: Union[str, List[str]], 
                   subject: str, 

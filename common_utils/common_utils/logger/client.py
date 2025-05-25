@@ -7,7 +7,7 @@ from typing import Dict, Any, Optional
 class LoggerClient:
     def __init__(self, service_name, logger_url=None):
         self.service_name = service_name
-        self.logger_url = logger_url or os.environ.get("LOGGER_SERVICE_URL", "http://localhost:8002")
+        self.logger_url = logger_url or os.environ.get("LOGGER_SERVICE_URL", "http://localhost:7000")
     
     def _send_log(self, level, message, details=None):
         try:

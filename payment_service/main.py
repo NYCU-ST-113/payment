@@ -19,7 +19,7 @@ pymysql.install_as_MySQLdb()
 
 app = FastAPI()
 logger = LoggerClient("payment-service")
-EMAIL_SERVICE_URL = os.environ.get("EMAIL_SERVICE_URL", "http://localhost:8001")
+EMAIL_SERVICE_URL = os.environ.get("EMAIL_SERVICE_URL", "http://localhost:6000")
 
 mailer = MailerClient("payment-service", EMAIL_SERVICE_URL)
 
