@@ -49,16 +49,16 @@ mkdir -p logs csv_exports
 
 Start the Payment Service with:
 ```bash
-uvicorn payment_service.main:app --reload --port 8000
+uvicorn main:app --host 0.0.0.0 --port 5000 --reload
 ```
 
-The service will be available at `http://localhost:8000`.
+The service will be available at `http://140.113.207.240:5000`.
 
 ## API Documentation
 
 Once the service is running, you can access the API documentation at:
-- Swagger UI: `http://localhost:8000/docs`
-- ReDoc: `http://localhost:8000/redoc`
+- Swagger UI: `http://140.113.207.240:5000/docs`
+- ReDoc: `http://140.113.207.240:5000/redoc`
 
 ## Features
 
