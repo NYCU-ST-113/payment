@@ -27,12 +27,12 @@ cd payment
 2. **Create and activate a virtual environment**
 ```bash
 # Create a virtual environment
-python3 -m venv venv
+python3 -m venv payment_env
 # Activate the virtual environment
 # On Linux/Mac:
-source venv/bin/activate
+source payment_env/bin/activate
 # On Windows:
-# venv\Scripts\activate
+# payment_env\Scripts\activate
 ```
 
 3. **Install dependencies**
