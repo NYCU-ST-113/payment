@@ -1,5 +1,5 @@
 echo "# Python
-venv/
+payment_env/
 logs/
 csv_exports/
 __pycache__/
@@ -34,3 +34,5 @@ coverage.xml
 # Local development settings
 *.sqlite3
 *.db" > .gitignore
+
+test.db
